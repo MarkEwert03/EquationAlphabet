@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "equations"
+version = "0.0.1"
+description = "Simple equations (+ and *) with symbolic generators and solvers"
+authors = [{ name = "Your Name" }]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
