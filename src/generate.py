@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 from itertools import product, combinations
 from typing import List
+
 from .models import CompactEquation
 
 
@@ -17,25 +19,6 @@ def generate_all_equations(n: int) -> List[CompactEquation]:
 
     Returns:
         List of 4-tuples: (x, op, y, z)
-
-    Examples:
-    >>> generate_all_equations(0)
-    []
-    >>> generate_all_equations(1)
-    [('A', '+', 'A', 'A'), ('A', '*', 'A', 'A')]
-    >>> generate_all_equations(2)
-    [
-        ('A', '+', 'A', 'A'), ('A', '*', 'A', 'A'),
-        ('A', '+', 'A', 'B'), ('A', '*', 'A', 'B'),
-        ('A', '+', 'B', 'A'), ('A', '*', 'B', 'A'),
-        ('A', '+', 'B', 'B'), ('A', '*', 'B', 'B'),
-        ('B', '+', 'A', 'A'), ('B', '*', 'A', 'A'),
-        ('B', '+', 'A', 'B'), ('B', '*', 'A', 'B'),
-        ('B', '+', 'B', 'A'), ('B', '*', 'B', 'A'),
-        ('B', '+', 'B', 'B'), ('B', '*', 'B', 'B')
-    ]
-    >>> len(generate_all_equations(2))
-    16
     """
     if not 1 <= n <= 26:
         return []
@@ -55,8 +38,8 @@ def generate_representative_equations(n: int) -> List[CompactEquation]:
 
     For n < 3: emits a small hand-picked set for coverage.
     For n >= 3: for each 3-variable subset (x,y,z), emits 8 forms:
-        (x + x = x), (x + x = y), (x + y = x), (x + y = z)
-        (x * x = x), (x * x = y), (x * y = x), (x * y = z)
+        (x op x = x), (x op x = y), (x op y = x), (x op y = z)
+    for both '+' and '*'.
 
     NOTE: This does NOT generate all 2*n^3 equations; it is a compressed sample.
 

@@ -6,7 +6,7 @@ from collections import Counter
 from itertools import permutations, combinations
 from typing import Dict, List
 
-from .models import CompactEquation, SimpleEquation
+from .models import CompactEquation, stringify_equation, SimpleEquation
 from .generate import generate_all_equations
 
 
@@ -87,7 +87,7 @@ def generate_all_solutions(n: int, num_eqs_to_use: int):
         solution_counter[len(solutions)] += 1
         if len(solutions) == 1:
             presented_solution = {
-                "equations": eq_bundle,
+                "equations": [stringify_equation(eq) for eq in eq_bundle],
                 "labels": solutions[0],
             }
             unique_solution_options.append(presented_solution)
