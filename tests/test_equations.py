@@ -1,10 +1,6 @@
-from src.equations import (
-    CompactEquation,
-    stringify_equation,
-    generate_all_equations,
-    verify_solution_set,
-    relabel,
-)
+from equations.generate import generate_all_equations
+from equations.models import CompactEquation
+from equations.solver import verify_solution_set, stringify_equation, relabel
 
 
 def test_generate_all_equations_count_small():
