@@ -89,7 +89,7 @@ class SimpleEquation:
             )
 
     # Serialization
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, int | str]:
         """
         Return a dictionary representation of the equation.
 
@@ -99,7 +99,7 @@ class SimpleEquation:
         return {"op": self.op, "var1": self.var1, "var2": self.var2, "var3": self.var3}
 
     @classmethod
-    def from_dict(cls, data: dict) -> "SimpleEquation":
+    def from_dict(cls, data: Dict[str, int | str]) -> "SimpleEquation":
         """
         Create a SimpleEquation from a dictionary.
 
