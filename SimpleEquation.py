@@ -97,11 +97,11 @@ class SimpleEquation:
         return cls(op_found, int(a_str), int(b_str), int(right))
 
     # Checking answers
-    def check_answer(self, answer: int) -> bool:
+    def is_sound(self) -> bool:
         """
-        Return True if answer equals var3 (the stated result).
+        Return True if: `var1 <op> var2 == var3`
         """
-        return isinstance(answer, int) and answer > 0 and answer == self.var3
+        return self.evaluate() == self.var3
 
     # Comparison
     def equivalent(self, other: "SimpleEquation") -> bool:
@@ -120,7 +120,8 @@ class SimpleEquation:
         """
         Return a human-readable string representation.
         """
-        return f"{self.var1} {self.op} {self.var2} = {self.var3}"
+        eq_symbol = "=" if self.is_sound() else "≠"
+        return f"{self.var1} {self.op} {self.var2} {eq_symbol} {self.var3}"
 
     def __repr__(self) -> str:
         """
