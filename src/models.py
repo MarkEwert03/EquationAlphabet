@@ -4,7 +4,7 @@ import re
 
 
 # (op, x, y, z) where each is a single capital letter or op in {"+", "*"}
-Equation = Tuple[str, str, str, str]
+CompactEquation = Tuple[str, str, str, str]
 
 
 class SimpleEquation:
