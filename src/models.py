@@ -3,7 +3,7 @@ from typing import Tuple, Dict
 import re
 
 
-# (op, x, y, z) where each is a single capital letter or op in {"+", "*"}
+# (x, op, y, z) where each is a single capital letter or op in {"+", "*"}
 CompactEquation = Tuple[str, str, str, str]
 
 
