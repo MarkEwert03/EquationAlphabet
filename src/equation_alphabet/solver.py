@@ -7,7 +7,7 @@ from itertools import permutations, combinations
 from typing import Dict, List
 
 from .models import CompactEquation, stringify_equation, SimpleEquation
-from .generate import generate_all_equations
+from .generator import generate_all_equations
 
 
 def verify_solution_set(n: int, equations: List[CompactEquation]) -> List[Dict[str, int]]:
