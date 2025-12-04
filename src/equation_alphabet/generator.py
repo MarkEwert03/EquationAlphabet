@@ -36,7 +36,8 @@ def generate_representative_equations(n: int) -> List[CompactEquation]:
     """
     Generate a reduced representative set of equations across 3-symbol subsets.
 
-    For n < 3: emits a small hand-picked set for coverage.
+    For n <= 0: returns an empty list
+    For n == 1 or n == 2: emits a small hand-picked set for coverage.
     For n >= 3: for each 3-variable subset (x,y,z), emits 8 forms:
         (x op x = x), (x op x = y), (x op y = x), (x op y = z)
     for both '+' and '*'.
@@ -47,23 +48,22 @@ def generate_representative_equations(n: int) -> List[CompactEquation]:
         n: number of distinct symbols (1..26).
 
     Returns:
-        List of 4-tuples: (x, op, y, z)
+        List of 4-tuples: (op, x, y, z)
     """
     if not 1 <= n <= 26:
         return []
 
-    if n < 3:
-        forms: List[CompactEquation] = [("A", "+", "A", "A"), ("A", "*", "A", "A")]
-        if n == 2:
-            forms.extend(
-                [
-                    ("A", "+", "A", "B"),
-                    ("A", "*", "A", "B"),
-                    ("A", "+", "B", "A"),
-                    ("A", "*", "B", "A"),
-                ]
-            )
-        return forms
+    if n == 1:
+        return [("A", "+", "A", "A"), ("A", "*", "A", "A")]
+    if n == 2:
+        return [
+            ("A", "+", "A", "A"),
+            ("A", "*", "A", "A"),
+            ("A", "+", "A", "B"),
+            ("A", "*", "A", "B"),
+            ("A", "+", "B", "A"),
+            ("A", "*", "B", "A"),
+        ]
 
     all_variables = [chr(ord("A") + i) for i in range(n)]
     final_equations: List[CompactEquation] = []
@@ -71,14 +71,14 @@ def generate_representative_equations(n: int) -> List[CompactEquation]:
     for subset in combinations(all_variables, 3):
         x, y, z = subset
         forms_for_subset: List[CompactEquation] = [
-            (x, "+", x, x),
-            (x, "*", x, x),
-            (x, "+", x, y),
-            (x, "*", x, y),
-            (x, "+", y, x),
-            (x, "*", y, x),
-            (x, "+", y, z),
-            (x, "*", y, z),
+            ("+", x, x, x),
+            ("*", x, x, x),
+            ("+", x, x, y),
+            ("*", x, x, y),
+            ("+", x, y, x),
+            ("*", x, y, x),
+            ("+", x, y, z),
+            ("*", x, y, z),
         ]
         final_equations.extend(forms_for_subset)
     return final_equations
